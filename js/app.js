@@ -1,7 +1,69 @@
-/*
- * Create a list that holds all of your cards
- */
+const cardsList = [
+  `<li class="card"><i class="fa fa-diamond"></i></li>`,
+  `<li class="card"><i class="fa fa-paper-plane-o"></i></li>`,
+  `<li class="card"><i class="fa fa-anchor"></i></li>`,
+  `<li class="card"><i class="fa fa-bolt"></i></li>`,
+  `<li class="card"><i class="fa fa-cube"></i></li>`,
+  `<li class="card"><i class="fa fa-anchor"></i></li>`,
+  `<li class="card"><i class="fa fa-leaf"></i></li>`,
+  `<li class="card"><i class="fa fa-bicycle"></i></li>`,
+  `<li class="card"><i class="fa fa-diamond"></i></li>`,
+  `<li class="card"><i class="fa fa-bomb"></i></li>`,
+  `<li class="card"><i class="fa fa-leaf"></i></li>`,
+  `<li class="card"><i class="fa fa-bomb"></i></li>`,
+  `<li class="card"><i class="fa fa-bolt"></i></li>`,
+  `<li class="card"><i class="fa fa-bicycle"></i></li>`,
+  `<li class="card"><i class="fa fa-paper-plane-o"></i></li>`,
+  `<li class="card"><i class="fa fa-cube"></i></li>`
+];
 
+let chosenCards = [];
+
+createDeck();
+
+document.querySelector(".restart").addEventListener("click", function() {
+  createDeck();
+});
+
+function createDeck() {
+  let deck = document.querySelector(".deck");
+
+  if (document.querySelector(".card")) {
+    for (let i = cardsList.length; i > 0; i--) {
+      deck.removeChild(document.querySelector(".card"));
+    }
+  }
+
+  let suffledArray = shuffle(cardsList);
+
+  for (let i = cardsList.length; i >= 0; i--) {
+    if (cardsList[i] != undefined) {
+      deck.innerHTML += cardsList[i];
+    }
+  }
+
+  var cards = document.getElementsByClassName('card');
+
+  for (let i = 0; i < cards.length; i++) {
+    cards[i].addEventListener('click', pickACard);
+  }  
+}
+
+function pickACard (e) {
+    e.target.className += ' open show';
+
+    if (chosenCards.length < 2) {
+        chosenCards.push(e.target.childNodes[0].className);
+        
+        // if (chosenCards.length < 2 == 2 && chosenCards[0] == chosenCards[1]) {
+
+        // }
+    } else {
+        chosenCards.length = 0;
+    }
+
+    e.stopPropagation();
+}
 
 /*
  * Display the cards on the page
@@ -11,21 +73,21 @@
  */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+function shuffle(cardsList) {
+  let currentIndex = cardsList.length;
+  let temporaryValue;
+  let randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = cardsList[currentIndex];
+    cardsList[currentIndex] = cardsList[randomIndex];
+    cardsList[randomIndex] = temporaryValue;
+  }
 
-    return array;
+  return cardsList;
 }
-
-
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
