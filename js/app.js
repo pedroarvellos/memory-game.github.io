@@ -18,6 +18,7 @@ const cardsList = [
 ];
 
 let chosenCards = [];
+let moves = 0 ;
 
 createDeck();
 
@@ -42,27 +43,52 @@ function createDeck() {
     }
   }
 
-  var cards = document.getElementsByClassName('card');
+  document.querySelector(".moves").innerHTML = moves;
+
+  var cards = document.getElementsByClassName("card");
 
   for (let i = 0; i < cards.length; i++) {
-    cards[i].addEventListener('click', pickACard);
-  }  
+    cards[i].addEventListener("click", pickACard);
+  }
 }
 
-function pickACard (e) {
-    e.target.className += ' open show';
+function pickACard(e) {
+  if (e.target.className != "card open show") {
+    e.target.className = "card open show";
 
     if (chosenCards.length < 2) {
-        chosenCards.push(e.target.childNodes[0].className);
-        
-        // if (chosenCards.length < 2 == 2 && chosenCards[0] == chosenCards[1]) {
+      chosenCards.push(e.target);
 
-        // }
+      if (
+        chosenCards[0] != undefined &&
+        chosenCards[1] != undefined &&
+        chosenCards.length == 2
+      ) {
+        if (
+          chosenCards[0].childNodes[0].className ==
+          chosenCards[1].childNodes[0].className
+        ) {
+          chosenCards[0].className += " match";
+          chosenCards[1].className += " match";
+          chosenCards.length = 0;
+          
+          document.querySelector(".moves").innerHTML = ++moves;
+        } else {
+          let delay = 1000; //1000 microseconds = 1 second
+          setTimeout(function() {
+            chosenCards[0].className = "card close";
+            chosenCards[1].className = "card close";
+            chosenCards.length = 0;
+          }, delay);
+
+          document.querySelector(".moves").innerHTML = ++moves;
+        }
+      }
     } else {
-        chosenCards.length = 0;
+      chosenCards.length = 0;
     }
-
-    e.stopPropagation();
+  }
+  e.stopPropagation();
 }
 
 /*

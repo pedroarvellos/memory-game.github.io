@@ -1,36 +1,36 @@
 html {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 html,
 body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
-    font-family: 'Coda', cursive;
+  background: #ffffff url("../img/geometry2.png"); /* Background pattern from Subtle Patterns */
+  font-family: "Coda", cursive;
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 h1 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
 }
 
 /*
@@ -38,47 +38,58 @@ h1 {
  */
 
 .deck {
-    width: 660px;
-    min-height: 680px;
-    background: linear-gradient(160deg, #43cea2    0%, #185a9d 100%);
-    padding: 32px;
-    border-radius: 10px;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 0 3em;
+  width: 660px;
+  min-height: 680px;
+  background: linear-gradient(160deg, #43cea2 0%, #185a9d 100%);
+  padding: 32px;
+  border-radius: 10px;
+  box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 3em;
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
-    background: #17c7d4;
-    font-size: 0;
-    color: #ffffff;
-    border-radius: 16px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center; /*Element goes to the middle*/
-    align-items: center; /*Element goes to the center*/
-    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+  height: 125px;
+  width: 125px;
+  background: #17c7d4;
+  font-size: 0;
+  color: #ffffff;
+  border-radius: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center; /*Element goes to the middle*/
+  align-items: center; /*Element goes to the center*/
+  box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
 }
 
 .deck .card.open {
-    transform: rotateY(0);
-    background: #7d9da5;
-    cursor: default;
+  transform: rotateY(180deg);
+  background: #7d9da5;
+  cursor: default;
+  transition: 1s;
+  transform-style: preserve-3d;
+  position: relative;
 }
 
+.deck .card.close {
+    transform: rotateY(0); /*Once I implement the property to rotate 180 degrees when I input the class open, even if I take this class of the tag after, the card is already rotated 180 degrees, so I need to turn it to 0 again to rotate it back*/
+    cursor: pointer;
+    transition: 1s;
+    transform-style: preserve-3d;
+    position: relative;
+  }
+
 .deck .card.show {
-    font-size: 33px;
+  font-size: 33px;
 }
 
 .deck .card.match {
-    cursor: default;
-    background: #368374;
-    font-size: 33px;
+  cursor: default;
+  background: #368374;
+  font-size: 33px;
 }
 
 /*
@@ -86,24 +97,24 @@ h1 {
  */
 
 .score-panel {
-    text-align: left;
-    width: 345px;
-    margin-bottom: 10px;
+  text-align: left;
+  width: 345px;
+  margin-bottom: 10px;
 }
 
 .score-panel .stars {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    margin: 0 5px 0 0;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  margin: 0 5px 0 0;
 }
 
 .score-panel .stars li {
-    list-style: none;
-    display: inline-block;
+  list-style: none;
+  display: inline-block;
 }
 
 .score-panel .restart {
-    float: right;
-    cursor: pointer;
+  float: right;
+  cursor: pointer;
 }
