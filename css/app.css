@@ -75,12 +75,14 @@ h1 {
 }
 
 .deck .card.close {
-    transform: rotateY(0); /*Once I implement the property to rotate 180 degrees when I input the class open, even if I take this class of the tag after, the card is already rotated 180 degrees, so I need to turn it to 0 again to rotate it back*/
-    cursor: pointer;
-    transition: 1s;
-    transform-style: preserve-3d;
-    position: relative;
-  }
+  transform: rotateY(
+    0
+  ); /*Once I implement the property to rotate 180 degrees when I input the class open, even if I take this class of the tag after, the card is already rotated 180 degrees, so I need to turn it to 0 again to rotate it back*/
+  cursor: pointer;
+  transition: 1s;
+  transform-style: preserve-3d;
+  position: relative;
+}
 
 .deck .card.show {
   font-size: 33px;
@@ -117,4 +119,47 @@ h1 {
 .score-panel .restart {
   float: right;
   cursor: pointer;
+}
+
+/*
+ * Styles for the Victory Panel
+ */
+
+.victory-container {
+  box-shadow: 1px 6px 2px rgba(0, 0, 0, 0.26);
+  width: 30%;
+  height: 40%;
+
+  background: white;
+  display: flex;
+  position: absolute;
+
+  left: 42em;
+  top: 10em;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.victory-container button {
+  background: #368374;
+  background-image: -webkit-linear-gradient(top, #368374, #368374);
+  background-image: -moz-linear-gradient(top, #368374, #368374);
+  background-image: -ms-linear-gradient(top, #368374, #368374);
+  background-image: -o-linear-gradient(top, #368374, #368374);
+  background-image: linear-gradient(to bottom, #368374, #368374);
+  -webkit-border-radius: 9;
+  -moz-border-radius: 9;
+  border-radius: 9px;
+  font-size: 1.5em;
+  background: 185a9d;
+  padding: 8px 20px 10px 20px;
+  text-decoration: none;
+  margin-top: 1em;
+  cursor: pointer;
+}
+
+.victory-container button:hover {
+  background: #185a9d;
+  text-decoration: none;
 }
