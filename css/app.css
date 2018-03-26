@@ -131,7 +131,7 @@ h1 {
   height: 40%;
 
   background: white;
-  display: flex;
+  display: none;
   position: absolute;
 
   left: 42em;
