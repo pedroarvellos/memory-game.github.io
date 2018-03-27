@@ -163,3 +163,31 @@ h1 {
   background: #185a9d;
   text-decoration: none;
 }
+
+/*
+ * Media Query
+ */
+
+@media screen and (max-width: 740px) {
+  .container {
+    width: 100%;
+  }
+  .deck {
+    width: 96%;
+  }
+  .deck .card {
+    width: 18%;
+    margin-left: 5%;
+    height: 100px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+
+  .deck .card {
+    width: 18%;
+    margin-left: 5%;
+    /* height: 1%; */
+    height: 85px;
+  }
+}
