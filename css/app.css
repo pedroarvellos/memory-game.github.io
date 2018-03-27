@@ -183,7 +183,9 @@ h1 {
 }
 
 @media screen and (max-width: 540px) {
-
+  .deck {
+    width: 100%;
+  }
   .deck .card {
     width: 18%;
     margin-left: 5%;
