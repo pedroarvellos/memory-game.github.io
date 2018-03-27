@@ -28,9 +28,5 @@ document.querySelector(".restart").addEventListener("click", function() {
 });
 
 document.querySelector(".restart-again").addEventListener("click", function() {
-    let mg = new MemoryGameClass();
-    mg.createDeck(cardsList);
-    document.querySelector("div[class='container']").style.display = "flex";
-    document.querySelector("div[class='victory-container']").style.display = "none";
-    document.querySelector(".moves").innerHTML = moves;
-  });
+  location.reload();
+});
