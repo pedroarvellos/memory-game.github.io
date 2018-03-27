@@ -129,13 +129,13 @@ h1 {
   box-shadow: 1px 6px 2px rgba(0, 0, 0, 0.26);
   width: 30%;
   height: 40%;
+  margin-left: 34%;
+  margin-top: 10%;
 
   background: white;
   display: none;
-  position: absolute;
+  position: relative;
 
-  left: 42em;
-  top: 10em;
   justify-content: center;
   align-items: center;
   flex-direction: column;

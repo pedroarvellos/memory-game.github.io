@@ -2,12 +2,19 @@ let chosenCards = [];
 let matches = 0;
 let moves = 0;
 let isWaiting = false;
+let stars = {
+  trials: 0,
+  starsNumber: 3
+};
+let teste = 0;
 
 class MemoryGameClass {
   constructor() {
     chosenCards = [];
     matches = 0;
     moves = 0;
+    stars = {trials: 0, starsNumber: 3};
+    let teste = 0;
   }
 }
 
@@ -25,7 +32,7 @@ MemoryGameClass.prototype.createDeck = function(cardsList) {
   shuffle.call(cardsList);
 
   //Including cards on the deck.
-  for (let i = cardsList.length; i >= 0; i--) {
+  for (let i = 0; i < cardsList.length; i++) {
     if (cardsList[i] != undefined) {
       deck.innerHTML += cardsList[i];
     }
@@ -60,8 +67,8 @@ pickACard = function(e) {
           chosenCards[0].childNodes[0].className ==
           chosenCards[1].childNodes[0].className
         ) {
-          chosenCards[0].className += " match";
-          chosenCards[1].className += " match";
+          chosenCards[0].classList.add("match");
+          chosenCards[1].classList.add("match");
           chosenCards.length = 0;
 
           if (matches < 7) {
@@ -69,9 +76,12 @@ pickACard = function(e) {
           } else {
             document.querySelector("div[class='container']").style.display = "none";
             document.querySelector("div[class='victory-container']").style.display = "flex";
+            document.querySelector(".moves-result").innerHTML = ++moves;
+            document.querySelector(".stars-result").innerHTML = stars.starsNumber;
           }
 
-          document.querySelector(".moves").innerHTML = ++moves;
+          addMoviment();
+          checkStar();
         } else {
           let delay = 1000; //1000 microseconds = 1 second
           isWaiting = true;
@@ -84,7 +94,8 @@ pickACard = function(e) {
             isWaiting = false;
           }, delay);
 
-          document.querySelector(".moves").innerHTML = ++moves;
+          addMoviment();
+          checkStar();
         }
       }
     } else {
@@ -93,6 +104,22 @@ pickACard = function(e) {
   }
   e.stopPropagation();
 };
+
+function addMoviment() {
+  document.querySelector(".moves").innerHTML = ++moves;
+}
+
+function checkStar() {
+  stars.trials++;
+  let starsNode = document.querySelector(".stars");
+  if(stars.trials > 10 && stars.trials < 15) {
+    starsNode.removeChild(document.querySelector(".starThird"));
+    stars.starsNumber--;
+  } else if(stars.trials > 15) {
+    starsNode.removeChild(document.querySelector(".starSecond"));
+    stars.starsNumber--;
+  }
+}
 
 // Shuffle function.
 function shuffle() {
