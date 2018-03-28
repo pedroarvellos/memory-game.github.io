@@ -183,13 +183,30 @@ h1 {
 }
 
 @media screen and (max-width: 540px) {
-  .deck {
+  body {
     width: 100%;
   }
+
+  .score-panel {
+    width: 85%;
+  }
+
+  .deck {
+    margin-top: 10px;
+    padding: 5px;
+    width: 95%;
+    min-height: 430px;
+  }
+
   .deck .card {
-    width: 18%;
-    margin-left: 5%;
-    /* height: 1%; */
-    height: 85px;
+    height: 80px;
+    width: 20%;
+    margin-left: 1px;
+  }
+
+  .victory-container {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 35%;
   }
 }
