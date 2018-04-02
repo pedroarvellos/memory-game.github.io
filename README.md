@@ -11,3 +11,5 @@ Download the project directly or go to a specific folder and download it by git:
 `git init` 
 
 `git clone https://github.com/pedroarvellos/memory-game.github.io.git`
+
+The project can be opened in any text editor, for example: _Sublime Text_, _Visual Studio_,  _Sublime Text_, etc.
