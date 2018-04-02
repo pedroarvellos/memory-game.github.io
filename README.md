@@ -6,7 +6,6 @@ Access the Memory Game: https://pedroarvellos.github.io/memory-game.github.io/
 
 ## How to use
 
-Go to the desired page and download it:
+Download the project directly or go to a specific folder and download it by git:
 
 `git pull`
-
