@@ -10,4 +10,4 @@ Download the project directly or go to a specific folder and download it by git:
 
 `git init` 
 
-`git pull`
+`git clone https://github.com/pedroarvellos/memory-game.github.io.git`
