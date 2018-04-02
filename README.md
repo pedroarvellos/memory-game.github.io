@@ -8,5 +8,6 @@ Access the Memory Game: https://pedroarvellos.github.io/memory-game.github.io/
 
 Download the project directly or go to a specific folder and download it by git:
 
-`git init` \n
+`git init` 
+
 `git pull`
