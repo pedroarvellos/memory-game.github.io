@@ -1,123 +1,125 @@
-let chosenCards = [];
-let matches = 0;
-let moves = 0;
-let isWaiting = false;
-let stars = {
-  trials: 0,
-  starsNumber: 3
-};
-let teste = 0;
+let gameInstance = null;
 
 class MemoryGameClass {
   constructor() {
-    chosenCards = [];
-    matches = 0;
-    moves = 0;
-    stars = {trials: 0, starsNumber: 3};
-    let teste = 0;
-  }
-}
-
-MemoryGameClass.prototype.createDeck = function(cardsList) {
-  let deck = document.querySelector(".deck");
-
-  //Removing cards from deck.
-  if (document.querySelector(".card")) {
-    for (let i = cardsList.length; i > 0; i--) {
-      deck.removeChild(document.querySelector(".card"));
-    }
+    this.chosenCards = [];
+    this.matches = 0;
+    this.moves = 0;
+    this.isWaiting = false;
+    this.stars = { trials: 0, starsNumber: 3 };
   }
 
-  //Shuffling array with cards.
-  shuffle.call(cardsList);
+  createDeck(cardsList) {
+    let deck = document.querySelector(".deck");
 
-  //Including cards on the deck.
-  for (let i = 0; i < cardsList.length; i++) {
-    if (cardsList[i] != undefined) {
-      deck.innerHTML += cardsList[i];
-    }
-  }
-
-  var cards = document.getElementsByClassName("card");
-
-  //Including listeners in each card.
-  for (let i = 0; i < cards.length; i++) {
-    cards[i].addEventListener("click", pickACard);
-  }
-};
-
-pickACard = function(e) {
-  if (
-    e.target.className != "card open show" &&
-    e.target.className != "card open show match" &&
-    isWaiting == false &&
-    e.target == this
-  ) {
-    e.target.className = "card open show";
-
-    if (chosenCards.length < 2) {
-      chosenCards.push(e.target);
-
-      if (
-        chosenCards[0] != undefined &&
-        chosenCards[1] != undefined &&
-        chosenCards.length == 2
-      ) {
-        if (
-          chosenCards[0].childNodes[0].className ==
-          chosenCards[1].childNodes[0].className
-        ) {
-          chosenCards[0].classList.add("match");
-          chosenCards[1].classList.add("match");
-          chosenCards.length = 0;
-
-          if (matches < 7) {
-            matches++;
-          } else {
-            document.querySelector("div[class='container']").style.display = "none";
-            document.querySelector("div[class='victory-container']").style.display = "flex";
-            document.querySelector(".moves-result").innerHTML = ++moves;
-            document.querySelector(".stars-result").innerHTML = stars.starsNumber;
-          }
-
-          addMoviment();
-          checkStar();
-        } else {
-          let delay = 1000; //1000 microseconds = 1 second
-          isWaiting = true;
-          setTimeout(function() {
-            chosenCards[0].className = "card close";
-            chosenCards[1].className = "card close";
-            chosenCards.length = 0;
-          }, delay);
-          setTimeout(function() {
-            isWaiting = false;
-          }, delay);
-
-          addMoviment();
-          checkStar();
-        }
+    //Removing cards from deck.
+    if (document.querySelector(".card")) {
+      for (let i = cardsList.length; i > 0; i--) {
+        deck.removeChild(document.querySelector(".card"));
       }
-    } else {
-      chosenCards.length = 0;
+    }
+    //Shuffling array with cards.
+    shuffle.call(cardsList);
+
+    //Including cards on the deck.
+    for (let i = 0; i < cardsList.length; i++) {
+      if (cardsList[i] != undefined) {
+        deck.innerHTML += cardsList[i];
+      }
+    }
+
+    var cards = document.getElementsByClassName("card");
+
+    //Including listeners in each card.
+    for (let i = 0; i < cards.length; i++) {
+      //Closure is used to store a value which will be used another time.
+      cards[i].addEventListener("click", pickACard(this, cards[i]));
     }
   }
-  e.stopPropagation();
-};
-
-function addMoviment() {
-  document.querySelector(".moves").innerHTML = ++moves;
 }
 
-function checkStar() {
-  stars.trials++;
+function pickACard(game, card) {
+  return (e) => {
+    if (
+      e.target.className != "card open show" &&
+      e.target.className != "card open show match" &&
+      game.isWaiting == false &&
+      e.target == card
+    ) {
+      e.target.className = "card open show";
+
+      if (game.chosenCards.length < 2) {
+        game.chosenCards.push(e.target);
+
+        if (
+          game.chosenCards[0] != undefined &&
+          game.chosenCards[1] != undefined &&
+          game.chosenCards.length == 2
+        ) {
+          if (
+            game.chosenCards[0].childNodes[0].className ==
+            game.chosenCards[1].childNodes[0].className
+          ) {
+            game.chosenCards[0].classList.add("match");
+            game.chosenCards[1].classList.add("match");
+            game.chosenCards.length = 0;
+
+            if (game.matches < 7) {
+              game.matches++;
+            } else {
+              document.querySelector("div[class='container']").style.display =
+                "none";
+              document.querySelector(
+                "div[class='victory-container']"
+              ).style.display =
+                "flex";
+              document.querySelector(".moves-result").innerHTML = game.moves++;
+              document.querySelector(".stars-result").innerHTML =
+                game.stars.starsNumber;
+              document.querySelector(
+                ".time-result"
+              ).innerHTML = timer.getTimeValues().toString();
+            }
+
+            addMoviment(game);
+            checkStar(game);
+          } else {
+            let delay = 1000; //1000 microseconds = 1 second
+            game.isWaiting = true;
+            setTimeout(function() {
+              game.chosenCards[0].className = "card close";
+              game.chosenCards[1].className = "card close";
+              game.chosenCards.length = 0;
+            }, delay);
+            setTimeout(function() {
+              game.isWaiting = false;
+            }, delay);
+
+            addMoviment(game);
+            checkStar(game);
+          }
+        }
+      } else {
+        game.chosenCards.length = 0;
+      }
+    }
+    e.stopPropagation();
+  };
+}
+
+function addMoviment(game) {
+  document.querySelector(".moves").innerHTML = game.moves++;
+}
+
+function checkStar(game) {
+  game.stars.trials++;
   let starsNode = document.querySelector(".stars");
-  if(stars.trials > 10 && stars.trials < 15) {
+  if (game.stars.trials > 10 && game.stars.trials < 15) {
     starsNode.removeChild(document.querySelector(".starThird"));
-    stars.starsNumber--;
-  } else if(stars.trials > 15) {
+    game.stars.starsNumber--;
+  } else if (game.stars.trials > 15) {
     starsNode.removeChild(document.querySelector(".starSecond"));
-    stars.starsNumber--;
+    game.stars.starsNumber--;
   }
 }
 
