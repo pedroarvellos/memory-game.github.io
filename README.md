@@ -22,3 +22,8 @@ This is a simples memory game, and conclude the game successfully you have the f
 - If you match all of them in just 10 steps, you'll get 3 stars. If you match in less then 15 steps you'll get three and if you conclude in more then 15 steps you'll have just 1 star.
 - It's important to finish the game in a short time. As you play the game, the time will pass and be showed in the end.
 - If you want to restart, just click on the refresh item and do it again.
+
+## Libs which were used
+
+It was used the easytime lib to implement the timer, this very lib helps in a quite great way when it comes to easy timer implementation. To have more details about this lib, take a look at the GitHub Project: https://github.com/albert-gonzalez/easytimer.js
+
