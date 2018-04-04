@@ -32,7 +32,7 @@ class MemoryGameClass {
 
     //Including listeners in each card.
     for (let i = 0; i < cards.length; i++) {
-      //Closure is used to store a value which will be used another time.
+      //Closure is used to store a value which will be used another time. In this case, I'm sending values to a function which will receive these values and return something which used this values, but this something will be executed just when I click and trigger an event, that's will in this return I'll receive just the event, because the other params are already stored.
       cards[i].addEventListener("click", pickACard(this, cards[i]));
     }
   }
